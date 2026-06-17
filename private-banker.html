@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Aldano — Private Banking</title>
+  <meta name="description" content="Consulenza patrimoniale riservata per famiglie e imprenditori. Il patrimonio si misura in generazioni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --slate:    #1C2A33;
+      --paper:    #F3EFE7;
+      --brass:    #8A6F4E;
+      --smoke:    #5C6770;
+      --bordeaux: #A8403A;
+      --paper-dim: #E7E1D4;
+      --hairline: rgba(28, 42, 51, 0.14);
+
+      --serif: "Newsreader", Georgia, serif;
+      --sans:  "Inter", system-ui, sans-serif;
+      --mono:  "JetBrains Mono", monospace;
+
+      --measure: 64ch;
+      --gutter: clamp(1.25rem, 5vw, 6rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--slate);
+      font-family: var(--sans);
+      font-size: clamp(1rem, 0.95rem + 0.3vw, 1.0625rem);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--bordeaux);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin: 0 0 1.25rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      font-family: var(--sans);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      padding: 0.85rem 1.6rem;
+      border: 1px solid var(--slate);
+      background: var(--slate);
+      color: var(--paper);
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .btn:hover { background: transparent; color: var(--slate); }
+    .btn--ghost {
+      background: transparent;
+      color: var(--slate);
+      border-color: var(--hairline);
+    }
+    .btn--ghost:hover { border-color: var(--slate); }
+
+    /* ---- Signature: horizon timeline ---- */
+    .horizon {
+      position: relative;
+      height: 1px;
+      background: var(--hairline);
+      margin: 0;
+    }
+    .horizon::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: var(--horizon-progress, 0%);
+      background: var(--brass);
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .horizon-marks {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--smoke);
+      padding-top: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    /* 1. Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: color-mix(in srgb, var(--paper) 92%, transparent);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-block: 1.1rem;
+    }
+    .brand {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .brand span { color: var(--brass); }
+    .badge-riservato {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      margin-left: 0.9rem;
+      padding-left: 0.9rem;
+      border-left: 1px solid var(--hairline);
+    }
+    @media (max-width: 640px) { .badge-riservato { display: none; } }
+
+    /* 2. Hero */
+    .hero {
+      padding-block: clamp(4rem, 12vh, 9rem) clamp(2rem, 5vh, 4rem);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+      max-width: 18ch;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--brass);
+    }
+    .hero p {
+      max-width: 46ch;
+      color: var(--smoke);
+      margin: 1.75rem 0 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    /* generic section rhythm */
+    section { padding-block: clamp(3.5rem, 9vh, 6.5rem); }
+    .section-head { max-width: var(--measure); margin-bottom: 3rem; }
+    .section-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.7rem); }
+    .section-head p { color: var(--smoke); margin-top: 1rem; }
+
+    /* 3. Per chi */
+    .audience { background: var(--slate); color: var(--paper); }
+    .audience .eyebrow { color: color-mix(in srgb, var(--brass) 80%, white); }
+    .audience h2 { max-width: 24ch; font-size: clamp(1.9rem, 4vw, 3rem); }
+    .audience-list {
+      list-style: none;
+      margin: 2.5rem 0 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+    .audience-list li {
+      padding: 1.4rem 0;
+      border-top: 1px solid rgba(243, 239, 231, 0.16);
+      max-width: var(--measure);
+    }
+    .audience-list li:last-child { border-bottom: 1px solid rgba(243, 239, 231, 0.16); }
+
+    /* 4. Servizi */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      background: var(--hairline);
+      border: 1px solid var(--hairline);
+    }
+    .service {
+      background: var(--paper);
+      padding: 2.25rem 2rem;
+    }
+    .service h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+    .service .num {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--brass);
+      letter-spacing: 0.1em;
+    }
+    .service p { color: var(--smoke); font-size: 0.95rem; margin: 0.5rem 0 0; }
+
+    /* 5. Metodo — numbered sequence (order is real info here) */
+    .method-steps {
+      counter-reset: step;
+      display: grid;
+      gap: 0;
+    }
+    .method-steps li {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 4rem 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--hairline);
+      align-items: baseline;
+    }
+    .method-steps li::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      color: var(--brass);
+    }
+    .method-steps h3 { font-size: 1.35rem; }
+    .method-steps p { color: var(--smoke); margin: 0.4rem 0 0; max-width: 52ch; }
+
+    /* 6. Prova / cifre */
+    .proof { background: var(--paper-dim); }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .stat .figure {
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+    .stat .label {
+      font-size: 0.85rem;
+      color: var(--smoke);
+      margin-top: 0.4rem;
+      max-width: 22ch;
+    }
+    .credentials {
+      font-size: 0.85rem;
+      color: var(--smoke);
+      border-top: 1px solid var(--hairline);
+      padding-top: 1.5rem;
+      max-width: var(--measure);
+    }
+
+    /* 7. Testimonianza */
+    .quote { text-align: left; }
+    .quote blockquote {
+      margin: 0;
+      max-width: 30ch;
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-style: italic;
+      line-height: 1.25;
+    }
+    .quote cite {
+      display: block;
+      margin-top: 2rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-style: normal;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--smoke);
+    }
+
+    /* 8. CTA / form */
+    .contact { background: var(--slate); color: var(--paper); }
+    .contact .eyebrow { color: color-mix(in srgb, var(--brass) 80%, white); }
+    .contact h2 { font-size: clamp(1.9rem, 4vw, 3rem); max-width: 16ch; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      margin-top: 3rem;
+      align-items: start;
+    }
+    @media (max-width: 760px) { .contact-grid { grid-template-columns: 1fr; } }
+    .form-field { margin-bottom: 1.5rem; }
+    .form-field label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--paper) 70%, transparent);
+      margin-bottom: 0.5rem;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(243, 239, 231, 0.3);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 1rem;
+      padding: 0.6rem 0;
+      transition: border-color 0.2s ease;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-bottom-color: var(--brass);
+    }
+    .form-note {
+      font-size: 0.85rem;
+      color: color-mix(in srgb, var(--paper) 65%, transparent);
+      line-height: 1.6;
+    }
+    .contact .btn {
+      background: var(--brass);
+      border-color: var(--brass);
+      color: var(--slate);
+      margin-top: 0.5rem;
+    }
+    .contact .btn:hover { background: transparent; color: var(--paper); }
+
+    /* 9. Footer */
+    .site-footer {
+      background: var(--slate);
+      color: color-mix(in srgb, var(--paper) 60%, transparent);
+      font-size: 0.8rem;
+      padding-block: 3rem 4rem;
+    }
+    .site-footer .wrap { display: grid; gap: 1.5rem; }
+    .site-footer .legal { max-width: 70ch; line-height: 1.7; }
+    .site-footer .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid rgba(243, 239, 231, 0.16);
+      padding-top: 1.5rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .horizon::before { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Header -->
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <div>
+        <a class="brand" href="#">Studio <span>Aldano</span></a>
+        <span class="badge-riservato">Consulenza riservata</span>
+      </div>
+      <a class="btn btn--ghost" href="#colloquio">Richiedi un colloquio</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Private Banking · dal 1998</p>
+        <h1>Il patrimonio si misura in <em>generazioni</em>, non in trimestri.</h1>
+        <p>Affianchiamo un numero ristretto di famiglie e imprenditori nella protezione e nel passaggio della loro ricchezza, con un mandato costruito sul lungo periodo.</p>
+        <a class="btn" href="#colloquio">Richiedi un colloquio riservato</a>
+      </div>
+    </section>
+
+    <!-- Signature: horizon timeline -->
+    <div class="wrap">
+      <div class="horizon" data-horizon></div>
+      <div class="horizon-marks">
+        <span>Oggi</span>
+        <span>10 anni</span>
+        <span>25 anni</span>
+        <span>Prossima generazione</span>
+      </div>
+    </div>
+
+    <!-- 3. Per chi -->
+    <section class="audience">
+      <div class="wrap">
+        <p class="eyebrow">Per chi lavoriamo</p>
+        <h2>Un mandato selettivo, per chi ha qualcosa da trasmettere.</h2>
+        <ul class="audience-list">
+          <li>Famiglie con un patrimonio strutturato da preservare nel tempo.</li>
+          <li>Imprenditori di fronte alla cessione o al passaggio dell'azienda.</li>
+          <li>Patrimoni in transizione generazionale, tra eredi e governance.</li>
+          <li>Chi cerca un interlocutore unico, discreto e indipendente.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Servizi -->
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Aree di servizio</p>
+          <h2>Quattro ambiti, un'unica regia.</h2>
+        </div>
+        <div class="services-grid">
+          <article class="service">
+            <span class="num">A</span>
+            <h3>Gestione patrimoniale</h3>
+            <p>Strategie d'investimento costruite sul profilo della famiglia, non su un prodotto.</p>
+          </article>
+          <article class="service">
+            <span class="num">B</span>
+            <h3>Pianificazione successoria</h3>
+            <p>Trasmissione ordinata della ricchezza, tra tutela degli eredi ed equilibrio fiscale.</p>
+          </article>
+          <article class="service">
+            <span class="num">C</span>
+            <h3>Strutture e governance</h3>
+            <p>Holding, trust e patti di famiglia per dare forma e regole al patrimonio.</p>
+          </article>
+          <article class="service">
+            <span class="num">D</span>
+            <h3>Filantropia</h3>
+            <p>Veicoli dedicati per dare continuità ai valori, oltre al capitale.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Metodo -->
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Il metodo</p>
+          <h2>Un percorso, nell'ordine giusto.</h2>
+        </div>
+        <ol class="method-steps">
+          <li>
+            <div>
+              <h3>Ascolto</h3>
+              <p>Comprendiamo la storia della famiglia, gli obiettivi e i vincoli, prima di qualsiasi proposta.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Mandato</h3>
+              <p>Definiamo per iscritto perimetro, responsabilità e orizzonte temporale dell'incarico.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Strategia</h3>
+              <p>Costruiamo l'architettura patrimoniale e il piano d'investimento su misura.</p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Revisione continua</h3>
+              <p>Rivediamo periodicamente le scelte al variare dei mercati, della normativa e della famiglia.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Prova / cifre -->
+    <section class="proof">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Solidità</p>
+          <h2>Numeri sobri, verificabili.</h2>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="figure">27</div>
+            <div class="label">anni di attività indipendente</div>
+          </div>
+          <div class="stat">
+            <div class="figure">€1,8 mld</div>
+            <div class="label">patrimonio in consulenza</div>
+          </div>
+          <div class="stat">
+            <div class="figure">40</div>
+            <div class="label">famiglie seguite, per scelta poche</div>
+          </div>
+          <div class="stat">
+            <div class="figure">3</div>
+            <div class="label">generazioni accompagnate nel passaggio</div>
+          </div>
+        </div>
+        <p class="credentials">Studio Aldano S.r.l. — Consulenza finanziaria indipendente iscritta all'Albo OCF. Le informazioni di questa pagina hanno scopo illustrativo e non costituiscono sollecitazione all'investimento.</p>
+      </div>
+    </section>
+
+    <!-- 7. Testimonianza -->
+    <section class="quote">
+      <div class="wrap">
+        <blockquote>“Per la prima volta abbiamo parlato del patrimonio come di una storia di famiglia, non di un portafoglio.”</blockquote>
+        <cite>— Cliente, famiglia imprenditoriale (II generazione)</cite>
+      </div>
+    </section>
+
+    <!-- 8. CTA / form -->
+    <section class="contact" id="colloquio">
+      <div class="wrap">
+        <p class="eyebrow">Il primo passo</p>
+        <h2>Un colloquio riservato, senza impegno.</h2>
+        <div class="contact-grid">
+          <form onsubmit="return false;">
+            <div class="form-field">
+              <label for="nome">Nome e cognome</label>
+              <input id="nome" name="nome" type="text" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="contatto">Email o telefono</label>
+              <input id="contatto" name="contatto" type="text" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="contesto">In una riga, il suo contesto</label>
+              <textarea id="contesto" name="contesto" rows="2"></textarea>
+            </div>
+            <button class="btn" type="submit">Invia richiesta</button>
+          </form>
+          <p class="form-note">Le scriveremo entro due giorni lavorativi per fissare un primo incontro, di persona o in videochiamata. Ogni informazione è trattata con la massima riservatezza e non viene condivisa con terzi. Nessuna proposta commerciale automatica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- horizon close -->
+    <div class="wrap">
+      <div class="horizon" data-horizon style="--horizon-progress: 100%;"></div>
+    </div>
+  </main>
+
+  <!-- 9. Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="legal">Studio Aldano S.r.l. · Sede legale Via dei Giardini 12, Milano · P.IVA 00000000000 · Iscrizione Albo OCF n. 000000. Il presente sito ha finalità informative e non rappresenta consulenza personalizzata né offerta di prodotti finanziari.</p>
+      <div class="row">
+        <span>© 1998–2026 Studio Aldano</span>
+        <span>Privacy · Note legali · info@studioaldano.it</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Signature animation: reveal the horizon line on scroll.
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var lines = document.querySelectorAll('[data-horizon]');
+      if (reduce || !('IntersectionObserver' in window)) {
+        lines.forEach(function (el) { el.style.setProperty('--horizon-progress', '100%'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.setProperty('--horizon-progress', '100%');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      lines.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+</body>
+</html>
