@@ -5,7 +5,7 @@ Questo repository è stato creato insieme a Claude Code.
 ## Funzionalità
 
 - Supporto per la gestione dei file
-- Integrazione con GitHubb
+- Integrazione con GitHub
 - Documentazione in italiano
 
 ## Come iniziare
