@@ -190,8 +190,9 @@
       .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      font-size: clamp(2.5rem, 5.8vw, 4.8rem);
       max-width: 14ch;
+      letter-spacing: -0.025em;
     }
     .hero h1 em {
       font-style: italic;
@@ -290,8 +291,29 @@
       line-height: 1.5;
     }
 
-    /* generic section rhythm */
-    section { padding-block: clamp(3.5rem, 9vh, 6.5rem); }
+    /* Trust strip — credenziali come artefatti di fiducia (rif. Plaid/Robinhood) */
+    .trust {
+      border-bottom: 1px solid var(--hairline);
+    }
+    .trust__inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(1.25rem, 4vw, 3rem);
+      padding-block: 1.5rem;
+    }
+    .trust__item {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--smoke);
+      white-space: nowrap;
+    }
+    .trust__item strong { color: var(--slate); font-weight: 500; }
+
+    /* generic section rhythm — più aria, registro editoriale (rif. Coinbase/Mercury) */
+    section { padding-block: clamp(4.5rem, 11vh, 8rem); }
     .section-head { max-width: var(--measure); margin-bottom: 3rem; }
     .section-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.7rem); }
     .section-head p { color: var(--smoke); margin-top: 1rem; }
@@ -392,15 +414,28 @@
       max-width: var(--measure);
     }
 
-    /* 7. Testimonianza */
+    /* 7. Testimonianza — pull-quote editoriale (rif. Mercury) */
     .quote { text-align: left; }
     .quote blockquote {
+      position: relative;
       margin: 0;
-      max-width: 30ch;
+      max-width: 24ch;
       font-family: var(--serif);
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-size: clamp(1.9rem, 4.2vw, 3.1rem);
       font-style: italic;
-      line-height: 1.25;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+    }
+    .quote blockquote::before {
+      content: "\201C";
+      position: absolute;
+      top: -0.35em;
+      left: -0.5em;
+      font-size: 3em;
+      line-height: 1;
+      color: var(--brass);
+      opacity: 0.25;
+      pointer-events: none;
     }
     .quote cite {
       display: block;
@@ -592,6 +627,17 @@
       </div>
     </div>
 
+    <!-- Trust strip: credenziali come artefatti di fiducia -->
+    <div class="trust">
+      <div class="wrap trust__inner reveal" data-stagger>
+        <span class="trust__item">Iscritto Albo <strong>OCF</strong></span>
+        <span class="trust__item">Consulenza <strong>indipendente</strong></span>
+        <span class="trust__item">Vigilanza <strong>CONSOB</strong></span>
+        <span class="trust__item">Membro <strong>EFPA Italia</strong></span>
+        <span class="trust__item">Codice etico <strong>CFA</strong></span>
+      </div>
+    </div>
+
     <!-- 3. Per chi -->
     <section class="audience">
       <div class="wrap">
@@ -706,7 +752,7 @@
     <!-- 7. Testimonianza -->
     <section class="quote">
       <div class="wrap">
-        <blockquote class="reveal">“Per la prima volta abbiamo parlato del patrimonio come di una storia di famiglia, non di un portafoglio.”</blockquote>
+        <blockquote class="reveal">Per la prima volta abbiamo parlato del patrimonio come di una storia di famiglia, non di un portafoglio.</blockquote>
         <cite>— Cliente, famiglia imprenditoriale (II generazione)</cite>
       </div>
     </section>
