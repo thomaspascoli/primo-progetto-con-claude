@@ -365,9 +365,74 @@
       padding-top: 1.5rem;
     }
 
+    /* ---- Soft animations ---- */
+    /* Scroll reveal: gentle fade + rise */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    /* Staggered children (e.g. service cards, list rows) */
+    .reveal[data-stagger] > * {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+    .reveal[data-stagger].is-visible > * {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Hero entrance on load */
+    .hero h1, .hero p, .hero .eyebrow, .hero .btn {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hero .eyebrow { animation-delay: 0.05s; }
+    .hero h1       { animation-delay: 0.18s; }
+    .hero p        { animation-delay: 0.42s; }
+    .hero .btn     { animation-delay: 0.58s; }
+    @keyframes rise {
+      to { opacity: 1; transform: none; }
+    }
+
+    /* Soft hover micro-interactions */
+    .service {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                  background 0.4s ease;
+    }
+    .service:hover {
+      transform: translateY(-4px);
+      background: color-mix(in srgb, var(--paper) 96%, var(--brass));
+    }
+    .btn { transition: background 0.25s ease, color 0.25s ease,
+                       border-color 0.25s ease, transform 0.25s ease; }
+    .btn:active { transform: translateY(1px); }
+    .audience-list li,
+    .method-steps li { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+    .audience-list li:hover,
+    .method-steps li:hover { transform: translateX(6px); }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .horizon::before { transition: none; }
+      .reveal, .reveal[data-stagger] > *,
+      .hero h1, .hero p, .hero .eyebrow, .hero .btn {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
+      }
+      .service:hover, .audience-list li:hover,
+      .method-steps li:hover, .btn:active { transform: none; }
     }
   </style>
 </head>
@@ -410,8 +475,8 @@
     <section class="audience">
       <div class="wrap">
         <p class="eyebrow">Per chi lavoriamo</p>
-        <h2>Un mandato selettivo, per chi ha qualcosa da trasmettere.</h2>
-        <ul class="audience-list">
+        <h2 class="reveal">Un mandato selettivo, per chi ha qualcosa da trasmettere.</h2>
+        <ul class="audience-list reveal" data-stagger>
           <li>Famiglie con un patrimonio strutturato da preservare nel tempo.</li>
           <li>Imprenditori di fronte alla cessione o al passaggio dell'azienda.</li>
           <li>Patrimoni in transizione generazionale, tra eredi e governance.</li>
@@ -423,11 +488,11 @@
     <!-- 4. Servizi -->
     <section>
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="eyebrow">Aree di servizio</p>
           <h2>Quattro ambiti, un'unica regia.</h2>
         </div>
-        <div class="services-grid">
+        <div class="services-grid reveal" data-stagger>
           <article class="service">
             <span class="num">A</span>
             <h3>Gestione patrimoniale</h3>
@@ -455,11 +520,11 @@
     <!-- 5. Metodo -->
     <section>
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="eyebrow">Il metodo</p>
           <h2>Un percorso, nell'ordine giusto.</h2>
         </div>
-        <ol class="method-steps">
+        <ol class="method-steps reveal" data-stagger>
           <li>
             <div>
               <h3>Ascolto</h3>
@@ -491,11 +556,11 @@
     <!-- 6. Prova / cifre -->
     <section class="proof">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="eyebrow">Solidità</p>
           <h2>Numeri sobri, verificabili.</h2>
         </div>
-        <div class="stats">
+        <div class="stats reveal" data-stagger>
           <div class="stat">
             <div class="figure">27</div>
             <div class="label">anni di attività indipendente</div>
@@ -520,7 +585,7 @@
     <!-- 7. Testimonianza -->
     <section class="quote">
       <div class="wrap">
-        <blockquote>“Per la prima volta abbiamo parlato del patrimonio come di una storia di famiglia, non di un portafoglio.”</blockquote>
+        <blockquote class="reveal">“Per la prima volta abbiamo parlato del patrimonio come di una storia di famiglia, non di un portafoglio.”</blockquote>
         <cite>— Cliente, famiglia imprenditoriale (II generazione)</cite>
       </div>
     </section>
@@ -529,8 +594,8 @@
     <section class="contact" id="colloquio">
       <div class="wrap">
         <p class="eyebrow">Il primo passo</p>
-        <h2>Un colloquio riservato, senza impegno.</h2>
-        <div class="contact-grid">
+        <h2 class="reveal">Un colloquio riservato, senza impegno.</h2>
+        <div class="contact-grid reveal" data-stagger>
           <form onsubmit="return false;">
             <div class="form-field">
               <label for="nome">Nome e cognome</label>
@@ -586,6 +651,31 @@
         });
       }, { threshold: 0.4 });
       lines.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Soft scroll-reveal: fade + rise as elements enter the viewport.
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      // Index staggered children so each one delays a little more.
+      document.querySelectorAll('.reveal[data-stagger]').forEach(function (group) {
+        Array.prototype.forEach.call(group.children, function (child, i) {
+          child.style.setProperty('--i', i);
+        });
+      });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+      items.forEach(function (el) { io.observe(el); });
     })();
   </script>
 
