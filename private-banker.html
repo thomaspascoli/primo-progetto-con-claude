@@ -155,21 +155,139 @@
 
     /* 2. Hero */
     .hero {
-      padding-block: clamp(4rem, 12vh, 9rem) clamp(2rem, 5vh, 4rem);
+      position: relative;
+      overflow: hidden;
+      padding-block: clamp(4rem, 12vh, 9rem) clamp(3rem, 6vh, 5rem);
+      background:
+        radial-gradient(120% 90% at 85% -10%,
+          color-mix(in srgb, var(--brass) 14%, transparent), transparent 60%),
+        linear-gradient(180deg,
+          color-mix(in srgb, var(--paper-dim) 55%, var(--paper)), var(--paper));
+    }
+    /* Oversized quiet glyph behind the headline — character, not decoration */
+    .hero::before {
+      content: "&";
+      position: absolute;
+      top: -0.18em;
+      right: -0.02em;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(18rem, 42vw, 40rem);
+      line-height: 1;
+      color: var(--slate);
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero__grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: center;
+    }
+    @media (max-width: 880px) {
+      .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.6rem);
-      max-width: 18ch;
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+      max-width: 14ch;
     }
     .hero h1 em {
       font-style: italic;
       color: var(--brass);
+      position: relative;
+      white-space: nowrap;
+    }
+    .hero h1 em::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0.08em;
+      height: 2px;
+      background: color-mix(in srgb, var(--brass) 55%, transparent);
     }
     .hero p {
       max-width: 46ch;
       color: var(--smoke);
       margin: 1.75rem 0 2.5rem;
       font-size: 1.125rem;
+    }
+
+    /* React panel — dark card for contrast */
+    .hero__panel {
+      background: var(--slate);
+      color: var(--paper);
+      padding: 1.75rem 1.75rem 2rem;
+      box-shadow: 0 30px 60px -30px rgba(28, 42, 51, 0.45);
+    }
+    .proj__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .proj__label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--brass) 80%, white);
+    }
+    .proj__caption {
+      font-size: 0.78rem;
+      color: color-mix(in srgb, var(--paper) 60%, transparent);
+    }
+    .proj__figure {
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .proj__delta {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: color-mix(in srgb, var(--brass) 85%, white);
+      margin-top: 0.5rem;
+    }
+    .proj__spark { margin: 1.25rem 0 1.5rem; display: block; width: 100%; height: auto; }
+    .proj__spark path.line {
+      fill: none;
+      stroke: var(--brass);
+      stroke-width: 2;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .proj__spark circle { fill: var(--paper); }
+    .proj__controls {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.4rem;
+    }
+    .proj__btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      padding: 0.5rem 0.25rem;
+      background: transparent;
+      color: color-mix(in srgb, var(--paper) 75%, transparent);
+      border: 1px solid rgba(243, 239, 231, 0.2);
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    }
+    .proj__btn:hover { border-color: rgba(243, 239, 231, 0.5); }
+    .proj__btn[aria-pressed="true"] {
+      background: var(--brass);
+      border-color: var(--brass);
+      color: var(--slate);
+    }
+    .proj__disclaimer {
+      font-size: 0.68rem;
+      color: color-mix(in srgb, var(--paper) 45%, transparent);
+      margin: 1.25rem 0 0;
+      line-height: 1.5;
     }
 
     /* generic section rhythm */
@@ -452,11 +570,14 @@
   <main>
     <!-- 2. Hero -->
     <section class="hero">
-      <div class="wrap">
-        <p class="eyebrow">Private Banking · dal 1998</p>
-        <h1>Il patrimonio si misura in <em>generazioni</em>, non in trimestri.</h1>
-        <p>Affianchiamo un numero ristretto di famiglie e imprenditori nella protezione e nel passaggio della loro ricchezza, con un mandato costruito sul lungo periodo.</p>
-        <a class="btn" href="#colloquio">Richiedi un colloquio riservato</a>
+      <div class="wrap hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow">Private Banking · dal 1998</p>
+          <h1>Il patrimonio si misura in <em>generazioni</em>, non in trimestri.</h1>
+          <p>Affianchiamo un numero ristretto di famiglie e imprenditori nella protezione e nel passaggio della loro ricchezza, con un mandato costruito sul lungo periodo.</p>
+          <a class="btn" href="#colloquio">Richiedi un colloquio riservato</a>
+        </div>
+        <div class="hero__panel" id="hero-react" role="complementary" aria-label="Proiezione patrimoniale interattiva"></div>
       </div>
     </section>
 
@@ -677,6 +798,93 @@
       }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
       items.forEach(function (el) { io.observe(el); });
     })();
+  </script>
+
+  <!-- React (via CDN) per il widget interattivo dell'hero -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" data-presets="react">
+    const { useState, useMemo } = React;
+
+    // Orizzonti generazionali: anni nel futuro + un tasso reale prudente.
+    const ORIZZONTI = [
+      { label: "Oggi",        anni: 0  },
+      { label: "10 anni",     anni: 10 },
+      { label: "25 anni",     anni: 25 },
+      { label: "Generazione", anni: 40 },
+    ];
+    const CAPITALE_BASE = 5_000_000; // patrimonio illustrativo
+    const TASSO_REALE = 0.035;       // 3,5% reale annuo, prudente
+
+    const euro = (n) =>
+      new Intl.NumberFormat("it-IT", {
+        style: "currency", currency: "EUR",
+        maximumFractionDigits: 0,
+      }).format(n);
+
+    function ProiezioneGenerazionale() {
+      const [idx, setIdx] = useState(1);
+
+      // Valore proiettato per ogni orizzonte (interesse composto).
+      const valori = useMemo(
+        () => ORIZZONTI.map((o) => CAPITALE_BASE * Math.pow(1 + TASSO_REALE, o.anni)),
+        []
+      );
+      const valore = valori[idx];
+      const delta = valore - CAPITALE_BASE;
+
+      // Sparkline SVG: curva fino all'orizzonte selezionato.
+      const W = 320, H = 84;
+      const max = valori[valori.length - 1];
+      const punti = valori.map((v, i) => {
+        const x = (i / (valori.length - 1)) * W;
+        const y = H - (v / max) * (H - 8) - 4;
+        return [x, y];
+      });
+      const d = punti.map((p, i) => (i === 0 ? "M" : "L") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+      const sel = punti[idx];
+
+      return (
+        <div className="proj">
+          <div className="proj__head">
+            <span className="proj__label">Proiezione patrimoniale</span>
+            <span className="proj__caption">scenario illustrativo</span>
+          </div>
+
+          <div className="proj__figure">{euro(valore)}</div>
+          <div className="proj__delta">
+            {delta === 0 ? "capitale di partenza" : "+" + euro(delta) + " sull'orizzonte"}
+          </div>
+
+          <svg className="proj__spark" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
+            <path className="line" d={d} />
+            <circle cx={sel[0]} cy={sel[1]} r="4" />
+          </svg>
+
+          <div className="proj__controls" role="group" aria-label="Scegli l'orizzonte temporale">
+            {ORIZZONTI.map((o, i) => (
+              <button
+                key={o.label}
+                className="proj__btn"
+                aria-pressed={i === idx}
+                onClick={() => setIdx(i)}
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+
+          <p className="proj__disclaimer">
+            Esempio su un capitale di {euro(CAPITALE_BASE)} a un tasso reale del 3,5% annuo.
+            Non costituisce previsione né garanzia di rendimento.
+          </p>
+        </div>
+      );
+    }
+
+    const mount = document.getElementById("hero-react");
+    if (mount) ReactDOM.createRoot(mount).render(<ProiezioneGenerazionale />);
   </script>
 
 </body>
