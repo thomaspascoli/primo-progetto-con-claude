@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti — Studio Aldano</title>
+  <meta name="description" content="Richiedi un colloquio riservato con lo Studio Aldano. Sede a Milano.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <div>
+        <a class="brand" href="private-banker.html">Studio <span>Aldano</span></a>
+        <span class="badge-riservato">Consulenza riservata</span>
+      </div>
+      <nav class="site-nav" aria-label="Navigazione principale">
+        <a href="mission.html">Mission</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="press.html">Press</a>
+        <a href="contatti.html" aria-current="page">Contatti</a>
+      </nav>
+      <a class="btn btn--ghost" href="#form">Richiedi un colloquio</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <p class="eyebrow">Contatti</p>
+        <h1>Un colloquio riservato, <em>senza impegno</em>.</h1>
+        <p class="lead">Il primo passo è una conversazione. Ci scriva una riga sul suo contesto: le risponderemo entro due giorni lavorativi.</p>
+      </div>
+    </section>
+
+    <section class="section" id="form">
+      <div class="wrap">
+        <div class="contact-grid">
+          <form class="reveal" onsubmit="return false;">
+            <div class="form-field">
+              <label for="nome">Nome e cognome</label>
+              <input id="nome" name="nome" type="text" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="contatto">Email o telefono</label>
+              <input id="contatto" name="contatto" type="text" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="contesto">In una riga, il suo contesto</label>
+              <textarea id="contesto" name="contesto" rows="3"></textarea>
+            </div>
+            <button class="btn" type="submit">Invia richiesta</button>
+          </form>
+
+          <aside class="reveal">
+            <div class="contact-detail">
+              <div class="k">Sede</div>
+              <div class="v">Via dei Giardini 12<br>20121 Milano</div>
+            </div>
+            <div class="contact-detail">
+              <div class="k">Email</div>
+              <div class="v">info@studioaldano.it</div>
+            </div>
+            <div class="contact-detail">
+              <div class="k">Telefono</div>
+              <div class="v">+39 02 0000 0000</div>
+            </div>
+            <div class="contact-detail">
+              <div class="k">Orari</div>
+              <div class="v">Lun–Ven · 9:00–18:00<br>Incontri su appuntamento</div>
+            </div>
+            <p style="font-size:0.85rem; color:var(--smoke); line-height:1.6; margin-top:1.5rem;">Ogni informazione è trattata con la massima riservatezza e non viene condivisa con terzi. Nessuna proposta commerciale automatica.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav aria-label="Navigazione secondaria">
+        <a href="mission.html">Mission</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="press.html">Press</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+      <p class="legal">Studio Aldano S.r.l. · Sede legale Via dei Giardini 12, Milano · P.IVA 00000000000 · Iscrizione Albo OCF n. 000000. Il presente sito ha finalità informative e non rappresenta consulenza personalizzata né offerta di prodotti finanziari.</p>
+      <div class="row">
+        <span>© 1998–2026 Studio Aldano</span>
+        <span>Privacy · Note legali · info@studioaldano.it</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
