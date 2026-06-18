@@ -156,7 +156,7 @@
     .hero {
       position: relative;
       overflow: hidden;
-      padding-block: clamp(4.5rem, 13vh, 10rem) clamp(3rem, 6vh, 5rem);
+      padding-block: clamp(1.75rem, 5vh, 3.5rem) clamp(3rem, 6vh, 5rem);
       background:
         radial-gradient(130% 100% at 90% -20%, color-mix(in srgb, var(--brass) 16%, transparent), transparent 55%),
         radial-gradient(80% 60% at 0% 110%, color-mix(in srgb, var(--ink-3) 70%, transparent), transparent 60%);
@@ -173,7 +173,7 @@
     .hero__grid {
       position: relative; z-index: 2;
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 5vw, 4rem); align-items: center;
+      gap: clamp(2rem, 5vw, 4rem); align-items: start;
     }
     @media (max-width: 920px) { .hero__grid { grid-template-columns: 1fr; gap: 3.5rem; } }
     .hero h1 {
@@ -193,57 +193,40 @@
     }
     @media (max-width: 920px) { .hero__visual { min-height: clamp(360px, 80vw, 460px); margin-top: 1rem; } }
 
-    /* Card cliente ai punti delle orbite */
-    .client-card {
-      position: absolute;
-      z-index: 3;
-      display: flex; align-items: center; gap: 0.7rem;
-      padding: 0.6rem 0.85rem 0.6rem 0.6rem;
-      background: color-mix(in srgb, var(--ink-2) 92%, transparent);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 18px 40px -22px rgba(0,0,0,0.8);
-      margin: 0;
-      animation: floatCard 7s ease-in-out infinite;
-      animation-delay: calc(var(--d, 0) * 1s);
-    }
-    .client-card img {
-      width: 38px; height: 38px; border-radius: 50%;
-      object-fit: cover; flex-shrink: 0;
-      border: 1px solid color-mix(in srgb, var(--brass) 60%, transparent);
-    }
-    .client-card figcaption { line-height: 1.25; }
-    .client-card strong { display: block; font-size: 0.82rem; font-weight: 500; color: var(--bone); }
-    .client-card span { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.04em; color: var(--brass); }
-    /* posizioni attorno alla composizione (≈ punti delle 4 orbite) */
-    .client-card.c1 { top: 2%;  left: 50%; transform: translateX(-50%); }
-    .client-card.c2 { top: 34%; right: -4%; }
-    .client-card.c3 { bottom: 6%; left: 38%; }
-    .client-card.c4 { top: 46%; left: -6%; }
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-8px); }
-    }
-    /* la c1 è centrata: float senza perdere il translateX */
-    .client-card.c1 { animation-name: floatCardCentered; }
-    @keyframes floatCardCentered {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(-8px); }
-    }
-    @media (max-width: 1180px) {
-      .client-card span { display: none; }
-      .client-card { padding: 0.4rem; }
-    }
-    @media (max-width: 920px) {
-      .client-card.c2 { right: 2%; }
-      .client-card.c4 { left: 2%; }
-    }
-    .abstract {
+    /* Stage quadrato che contiene orbite + avatar orbitanti */
+    .orbit-stage {
       position: relative;
       width: min(100%, 460px);
-      height: auto;
       aspect-ratio: 1 / 1;
+    }
+    .orbit-avatars { position: absolute; inset: 0; z-index: 3; }
+    /* Avatar che orbitano (posizione aggiornata via JS, restano sempre dritti) */
+    .orb-avatar {
+      position: absolute; left: 50%; top: 50%;
+      margin: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+    .orb-avatar img {
+      width: 46px; height: 46px; border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid color-mix(in srgb, var(--brass) 65%, transparent);
+      background: var(--ink-2);
+      box-shadow: 0 10px 26px -12px rgba(0,0,0,0.9);
+    }
+    .orb-avatar figcaption {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.04em;
+      color: var(--bone); white-space: nowrap;
+      background: color-mix(in srgb, var(--ink-2) 88%, transparent);
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 2px 8px; backdrop-filter: blur(6px);
+    }
+    @media (max-width: 1180px) { .orb-avatar figcaption { display: none; } }
+
+    .abstract {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       z-index: 0;
       pointer-events: none;
       overflow: visible;
@@ -254,8 +237,6 @@
       stroke-width: 0.75;
       opacity: 0.28;
     }
-    .abstract .node { fill: var(--brass); opacity: 0.9; }
-    .abstract .node.sm { opacity: 0.6; }
     .abstract .core { opacity: 0.7; animation: corePulse 9s ease-in-out infinite; }
     .abstract .orbit { transform-origin: 200px 200px; }
     .abstract .o1 { animation: spin 38s linear infinite; }
@@ -424,7 +405,7 @@
         opacity: 1 !important; filter: none !important; transform: none !important; animation: none !important; transition: none !important;
       }
       .hero::after { animation: none !important; }
-      .abstract .orbit, .abstract .core, .client-card { animation: none !important; }
+      .abstract .orbit, .abstract .core { animation: none !important; }
       .service:hover, .method-steps li:hover { transform: none; }
     }
   </style>
@@ -462,48 +443,40 @@
           <a class="btn" href="#colloquio">Richiedi un colloquio riservato</a>
         </div>
         <div class="hero__visual">
-          <svg class="abstract" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
-            <defs>
-              <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#C49A6C" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#C49A6C" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <circle class="core" cx="200" cy="200" r="80" fill="url(#coreGlow)"/>
-            <g class="orbit o1">
-              <ellipse cx="200" cy="200" rx="150" ry="150"/>
-              <circle class="node" cx="350" cy="200" r="4"/>
-            </g>
-            <g class="orbit o2">
-              <ellipse cx="200" cy="200" rx="110" ry="170"/>
-              <circle class="node sm" cx="200" cy="30" r="3"/>
-            </g>
-            <g class="orbit o3">
-              <ellipse cx="200" cy="200" rx="180" ry="90"/>
-              <circle class="node sm" cx="20" cy="200" r="3"/>
-            </g>
-            <g class="orbit o4">
-              <ellipse cx="200" cy="200" rx="60" ry="60"/>
-              <circle class="node" cx="260" cy="200" r="3.5"/>
-            </g>
-          </svg>
+          <div class="orbit-stage">
+            <svg class="abstract" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
+              <defs>
+                <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#C49A6C" stop-opacity="0.5"/>
+                  <stop offset="100%" stop-color="#C49A6C" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle class="core" cx="200" cy="200" r="80" fill="url(#coreGlow)"/>
+              <g class="orbit o1"><ellipse cx="200" cy="200" rx="150" ry="150"/></g>
+              <g class="orbit o2"><ellipse cx="200" cy="200" rx="110" ry="170"/></g>
+              <g class="orbit o3"><ellipse cx="200" cy="200" rx="180" ry="90"/></g>
+              <g class="orbit o4"><ellipse cx="200" cy="200" rx="60" ry="60"/></g>
+            </svg>
 
-          <figure class="client-card c1" style="--d:0">
-            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Ritratto di una cliente" loading="lazy" width="38" height="38">
-            <figcaption><strong>Elena R.</strong><span>Famiglia · 3ª generazione</span></figcaption>
-          </figure>
-          <figure class="client-card c2" style="--d:1.6">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ritratto di un cliente" loading="lazy" width="38" height="38">
-            <figcaption><strong>Marco V.</strong><span>Cliente dal 2006</span></figcaption>
-          </figure>
-          <figure class="client-card c3" style="--d:0.8">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ritratto di una cliente" loading="lazy" width="38" height="38">
-            <figcaption><strong>Giulia T.</strong><span>Cessione d'azienda · 2021</span></figcaption>
-          </figure>
-          <figure class="client-card c4" style="--d:2.4">
-            <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Ritratto di un cliente" loading="lazy" width="38" height="38">
-            <figcaption><strong>Henri L.</strong><span>Family office · Ginevra</span></figcaption>
-          </figure>
+            <div class="orbit-avatars">
+              <figure class="orb-avatar" data-orbit="0" title="Famiglia · 3ª generazione">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Elena R." loading="lazy" width="46" height="46">
+                <figcaption>Elena R.</figcaption>
+              </figure>
+              <figure class="orb-avatar" data-orbit="1" title="Cliente dal 2006">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Marco V." loading="lazy" width="46" height="46">
+                <figcaption>Marco V.</figcaption>
+              </figure>
+              <figure class="orb-avatar" data-orbit="2" title="Cessione d'azienda · 2021">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Giulia T." loading="lazy" width="46" height="46">
+                <figcaption>Giulia T.</figcaption>
+              </figure>
+              <figure class="orb-avatar" data-orbit="3" title="Family office · Ginevra">
+                <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Henri L." loading="lazy" width="46" height="46">
+                <figcaption>Henri L.</figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -713,6 +686,34 @@
         });
       }, { threshold: 0.5 });
       figs.forEach(function (el) { io.observe(el); });
+    })();
+
+    // Avatar orbitanti: stesso movimento dei pallini (cerchi attorno al centro,
+    // raggi/velocità/direzioni identici alle 4 orbite SVG).
+    (function () {
+      var stage = document.querySelector('.orbit-stage');
+      var avatars = Array.prototype.slice.call(document.querySelectorAll('.orb-avatar'));
+      if (!stage || !avatars.length) return;
+      // r = distanza del pallino dal centro / 400 (unità viewBox)
+      var ORB = [
+        { r: 150/400, dur: 38, dir:  1, phase: 0 },              // o1 (era a destra)
+        { r: 170/400, dur: 52, dir: -1, phase: -Math.PI/2 },     // o2 (era in alto)
+        { r: 180/400, dur: 30, dir:  1, phase: Math.PI },        // o3 (era a sinistra)
+        { r:  60/400, dur: 18, dir: -1, phase: 0 }               // o4 (interna)
+      ];
+      function place(t) {
+        var S = stage.clientWidth;
+        for (var i = 0; i < avatars.length; i++) {
+          var o = ORB[i % ORB.length];
+          var ang = o.phase + o.dir * (t / 1000) * (2 * Math.PI / o.dur);
+          var x = Math.cos(ang) * o.r * S;
+          var y = Math.sin(ang) * o.r * S;
+          avatars[i].style.transform = 'translate(-50%,-50%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+        }
+      }
+      if (reduce) { place(0); return; }
+      function frame(ts) { place(ts); requestAnimationFrame(frame); }
+      requestAnimationFrame(frame);
     })();
   </script>
 
