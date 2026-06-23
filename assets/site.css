@@ -299,3 +299,21 @@ img { max-width: 100%; display: block; }
 .prose li { margin: 0.5rem 0; }
 .prose a { color: var(--brass); text-underline-offset: 3px; }
 .article__foot { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: center; justify-content: space-between; }
+
+/* ===== Schermi grandi e molto grandi: il contenuto riempie lo schermo ===== */
+@media (min-width: 1600px) {
+  :root { --gutter: clamp(3rem, 5vw, 7rem); }
+  .wrap { max-width: none; }            /* full-width, solo gutter laterale */
+  body { font-size: 1.075rem; }
+  .page-hero h1 { font-size: clamp(3rem, 4.6vw, 5.4rem); }
+  .section-head h2 { font-size: clamp(2.3rem, 3.4vw, 3.8rem); }
+  .lead { font-size: 1.3rem; max-width: 60ch; }
+  .section-head { max-width: 80ch; }
+}
+@media (min-width: 2000px) {
+  body { font-size: 1.15rem; }
+}
+@media (min-width: 2560px) {
+  body { font-size: 1.22rem; }
+  .lead { font-size: 1.45rem; }
+}

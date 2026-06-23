@@ -562,6 +562,26 @@
       50%      { transform: translate(-3%, 4%) scale(1.12); opacity: 1; }
     }
 
+    /* ===== Schermi grandi e molto grandi: il contenuto riempie lo schermo ===== */
+    @media (min-width: 1600px) {
+      :root { --gutter: clamp(3rem, 5vw, 7rem); }
+      .wrap { max-width: none; }          /* full-width, solo gutter laterale */
+      body { font-size: 1.075rem; }
+      .hero h1 { font-size: clamp(3.2rem, 4.8vw, 6rem); }
+      .hero p { font-size: 1.3rem; }
+      .section-head h2 { font-size: clamp(2.3rem, 3.6vw, 4rem); }
+      .audience-intro h2 { font-size: clamp(2.3rem, 3.6vw, 4rem); max-width: 24ch; }
+      .orbit-stage, .hero-orbit { width: min(100%, 600px); }
+    }
+    @media (min-width: 2000px) {
+      body { font-size: 1.15rem; }
+      .orbit-stage, .hero-orbit { width: min(100%, 720px); }
+      .hero__visual { min-height: clamp(480px, 38vw, 720px); }
+    }
+    @media (min-width: 2560px) {
+      body { font-size: 1.22rem; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal, .reveal[data-stagger] > *,
