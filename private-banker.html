@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio Aldano — Private Banking</title>
+  <title>Gabriele Turissini — Private Banking</title>
   <meta name="description" content="Consulenza patrimoniale riservata per famiglie e imprenditori. Il patrimonio si misura in generazioni.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,8 +135,9 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 1rem; padding-block: 1.1rem;
     }
-    .brand { font-family: var(--serif); font-size: 1.3rem; letter-spacing: 0.02em; text-decoration: none; }
-    .brand span { color: var(--brass); font-style: italic; }
+    .brand { display: inline-flex; flex-direction: column; gap: 0.12rem; line-height: 1; text-decoration: none; }
+    .brand__name { font-family: var(--serif); font-size: 1.2rem; letter-spacing: 0.01em; color: var(--bone); }
+    .brand__role { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); }
     .badge-riservato {
       font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--smoke);
@@ -379,6 +380,53 @@
       font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; color: var(--smoke);
     }
 
+    /* Partner — Allianz Bank */
+    .partner { background: var(--ink-2); border-block: 1px solid var(--line); }
+    .partner__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+    @media (max-width: 860px) { .partner__grid { grid-template-columns: 1fr; } }
+    .partner h2 { font-size: clamp(1.9rem, 4vw, 3rem); font-weight: 300; max-width: 20ch; }
+    .partner h2 em { font-style: italic; color: var(--brass); }
+    .partner__lead { color: var(--smoke); margin-top: 1.2rem; max-width: 54ch; }
+    .partner__lead strong { color: var(--bone); font-weight: 500; }
+    .partner__points { list-style: none; margin: 1.9rem 0 0; padding: 0; display: grid; gap: 0.9rem; }
+    .partner__points li { position: relative; padding-left: 1.6rem; color: var(--smoke); }
+    .partner__points li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 0.5rem; height: 0.5rem; border: 1px solid var(--brass); transform: rotate(45deg); }
+    .partner__card { border: 1px solid var(--line); background: #ffffff; padding: clamp(1.8rem, 4vw, 3rem); text-align: center; }
+    .partner__logo { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+    .partner__hr { width: 2.2rem; height: 1px; background: var(--brass); margin: 1.4rem auto 1.1rem; }
+    .partner__role { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: #5C6770; }
+
+    /* Fascia immagine full-width */
+    .image-band { position: relative; overflow: hidden; border-block: 1px solid var(--line); padding-block: clamp(4.5rem, 12vh, 8rem); }
+    .image-band__bg { position: absolute; inset: 0; z-index: 0; }
+    .image-band__bg img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.03) saturate(1.06); }
+    .image-band::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(14,20,25,0.86) 0%, rgba(14,20,25,0.45) 48%, rgba(14,20,25,0.08) 100%); }
+    .image-band > .wrap { position: relative; z-index: 1; }
+    .image-band h2 { font-size: clamp(1.9rem, 4.5vw, 3.2rem); font-weight: 300; max-width: 20ch; }
+    .image-band h2 em { font-style: italic; color: var(--brass); }
+    .image-band p { color: var(--bone); opacity: 0.9; margin-top: 1.2rem; max-width: 46ch; }
+
+    /* Servizi home — mosaico testo/immagine a scacchiera (rif. BlueHaven) */
+    .svc-mosaic { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: clamp(2.5rem, 5vw, 3.5rem); border: 1px solid var(--line); }
+    @media (max-width: 900px) { .svc-mosaic { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .svc-mosaic { grid-template-columns: 1fr; } }
+    .svc-cell { position: relative; aspect-ratio: 1 / 1; overflow: hidden; }
+    .svc-cell--img img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.03) saturate(1.06); transition: transform .7s cubic-bezier(.22,1,.36,1); }
+    .svc-cell--img:hover img { transform: scale(1.05); }
+    .svc-cell--text { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(1.5rem, 2.4vw, 2.4rem); text-decoration: none; }
+    .svc-cell--dark { background: var(--ink-2); color: var(--bone); }
+    .svc-cell--brass { background: var(--brass); color: var(--ink); }
+    .svc-cell--text h3 { font-size: clamp(1.45rem, 2.5vw, 2rem); font-weight: 400; line-height: 1.12; letter-spacing: -0.01em; }
+    .svc-cell__foot p { margin: 0 0 1.3rem; font-size: 0.92rem; }
+    .svc-cell--dark .svc-cell__foot p { color: var(--smoke); }
+    .svc-cell--brass .svc-cell__foot p { color: color-mix(in srgb, var(--ink) 78%, transparent); }
+    .svc-pill { display: inline-block; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.65rem 1.1rem; border: 1px solid currentColor; transition: background .3s ease, color .3s ease, border-color .3s ease; }
+    .svc-cell--dark .svc-pill { color: var(--bone); border-color: var(--line); }
+    .svc-cell--dark:hover .svc-pill { background: var(--brass); border-color: var(--brass); color: var(--ink); }
+    .svc-cell--brass .svc-pill { color: var(--ink); border-color: rgba(14,20,25,0.4); }
+    .svc-cell--brass:hover .svc-pill { background: var(--ink); border-color: var(--ink); color: var(--bone); }
+    @media (prefers-reduced-motion: reduce) { .svc-cell--img img, .svc-pill { transition: none !important; } }
+
     /* 8. CTA / form */
     .contact { background: var(--ink-2); border-top: 1px solid var(--line); }
     .contact h2 { font-size: clamp(2.1rem, 5vw, 3.6rem); max-width: 15ch; font-weight: 300; }
@@ -602,8 +650,8 @@
   <header class="site-header">
     <div class="wrap site-header__inner">
       <div>
-        <a class="brand" href="#">Studio <span>Aldano</span></a>
-        <span class="badge-riservato">Consulenza riservata</span>
+        <a class="brand" href="private-banker.html"><span class="brand__name">Gabriele Turissini</span><span class="brand__role">Private banker</span></a>
+        
       </div>
       <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
         <span></span><span></span><span></span>
@@ -734,6 +782,15 @@
       </div>
     </section>
 
+    <!-- Fascia immagine -->
+    <section class="image-band">
+      <div class="image-band__bg"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1800&h=800&fit=crop&q=80" alt="" loading="lazy"></div>
+      <div class="wrap">
+        <h2>Un capitale è fatto di persone, prima che di <em>numeri</em>.</h2>
+        <p>Per questo seguiamo poche famiglie, conoscendone la storia prima del portafoglio.</p>
+      </div>
+    </section>
+
     <!-- 4. Servizi -->
     <section id="servizi">
       <div class="wrap">
@@ -742,30 +799,42 @@
           <p class="eyebrow">Aree di servizio</p>
           <h2>Quattro ambiti, un'unica <em>regia</em>.</h2>
         </div>
-        <!-- Explorer interattivo (React island). Fallback statico se il JS non carica. -->
-        <div id="servizi-app" class="reveal">
-          <div class="services-grid" data-stagger>
-            <article class="service">
-              <span class="num">A</span>
-              <h3>Gestione patrimoniale</h3>
-              <p>Strategie d'investimento costruite sul profilo della famiglia, non su un prodotto.</p>
-            </article>
-            <article class="service">
-              <span class="num">B</span>
-              <h3>Pianificazione successoria</h3>
-              <p>Trasmissione ordinata della ricchezza, tra tutela degli eredi ed equilibrio fiscale.</p>
-            </article>
-            <article class="service">
-              <span class="num">C</span>
-              <h3>Strutture e governance</h3>
-              <p>Holding, trust e patti di famiglia per dare forma e regole al patrimonio.</p>
-            </article>
-            <article class="service">
-              <span class="num">D</span>
-              <h3>Filantropia</h3>
+        <!-- Servizi: mosaico testo/immagine a scacchiera (rif. BlueHaven) -->
+        <div class="svc-mosaic reveal">
+          <!-- riga 1 -->
+          <a class="svc-cell svc-cell--text svc-cell--dark" href="servizio-gestione-patrimoniale.html">
+            <h3>Gestione patrimoniale</h3>
+            <div class="svc-cell__foot">
+              <p>Strategie d'investimento sul profilo della famiglia, non su un prodotto.</p>
+              <span class="svc-pill">Scopri</span>
+            </div>
+          </a>
+          <div class="svc-cell svc-cell--img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=720&h=720&fit=crop&q=80" alt="" loading="lazy"></div>
+          <a class="svc-cell svc-cell--text svc-cell--dark" href="servizio-pianificazione-successoria.html">
+            <h3>Pianificazione successoria</h3>
+            <div class="svc-cell__foot">
+              <p>Trasmissione ordinata della ricchezza, tra eredi ed equilibrio fiscale.</p>
+              <span class="svc-pill">Scopri</span>
+            </div>
+          </a>
+          <div class="svc-cell svc-cell--img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=720&h=720&fit=crop&q=80" alt="" loading="lazy"></div>
+          <!-- riga 2 -->
+          <div class="svc-cell svc-cell--img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=720&h=720&fit=crop&q=80" alt="" loading="lazy"></div>
+          <a class="svc-cell svc-cell--text svc-cell--brass" href="servizio-strutture-governance.html">
+            <h3>Strutture e governance</h3>
+            <div class="svc-cell__foot">
+              <p>Holding, trust e patti di famiglia per dare regole al patrimonio.</p>
+              <span class="svc-pill">Scopri</span>
+            </div>
+          </a>
+          <div class="svc-cell svc-cell--img"><img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=720&h=720&fit=crop&q=80" alt="" loading="lazy"></div>
+          <a class="svc-cell svc-cell--text svc-cell--brass" href="servizio-filantropia.html">
+            <h3>Filantropia</h3>
+            <div class="svc-cell__foot">
               <p>Veicoli dedicati per dare continuità ai valori, oltre al capitale.</p>
-            </article>
-          </div>
+              <span class="svc-pill">Scopri</span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -841,7 +910,28 @@
           <div class="stat"><div class="figure" data-count="40" data-suffix="">0</div><div class="label">famiglie seguite, per scelta poche</div></div>
           <div class="stat"><div class="figure" data-count="3" data-suffix="">0</div><div class="label">generazioni accompagnate nel passaggio</div></div>
         </div>
-        <p class="credentials">Studio Aldano S.r.l. — Consulenza finanziaria indipendente iscritta all'Albo OCF. Le informazioni di questa pagina hanno scopo illustrativo e non costituiscono sollecitazione all'investimento.</p>
+        <p class="credentials">Gabriele Turissini S.r.l. — Consulenza finanziaria indipendente iscritta all'Albo OCF. Le informazioni di questa pagina hanno scopo illustrativo e non costituiscono sollecitazione all'investimento.</p>
+      </div>
+    </section>
+
+    <!-- Partner — Allianz Bank -->
+    <section class="partner">
+      <div class="wrap partner__grid reveal" data-stagger>
+        <div>
+          <p class="eyebrow">Il partner</p>
+          <h2>La cura del rapporto personale, la forza di <em>Allianz Bank</em>.</h2>
+          <p class="partner__lead">Affianchiamo le famiglie come financial advisor con <strong>Allianz Bank</strong> come partner di riferimento: una scelta che unisce la continuità e la riservatezza del consiglio personale alla solidità di uno dei principali gruppi finanziari al mondo.</p>
+          <ul class="partner__points">
+            <li>Solidità patrimoniale e affidabilità di gruppo</li>
+            <li>Gamma completa di soluzioni d'investimento e di protezione</li>
+            <li>Custodia e tutele di livello istituzionale</li>
+          </ul>
+        </div>
+        <div class="partner__card">
+          <div class="partner__mark">Allianz <b>Bank</b></div>
+          <div class="partner__hr"></div>
+          <div class="partner__role">Partner di riferimento</div>
+        </div>
       </div>
     </section>
 
@@ -899,10 +989,10 @@
   <!-- 9. Footer -->
   <footer class="site-footer">
     <div class="wrap">
-      <p class="legal">Studio Aldano S.r.l. · Sede legale Via dei Giardini 12, Milano · P.IVA 00000000000 · Iscrizione Albo OCF n. 000000. Il presente sito ha finalità informative e non rappresenta consulenza personalizzata né offerta di prodotti finanziari.</p>
+      <p class="legal">Gabriele Turissini S.r.l. · Sede legale Via dei Giardini 12, Milano · P.IVA 00000000000 · Iscrizione Albo OCF n. 000000. Il presente sito ha finalità informative e non rappresenta consulenza personalizzata né offerta di prodotti finanziari.</p>
       <div class="row">
-        <span>© 1998–2026 Studio Aldano</span>
-        <span>Privacy · Note legali · info@studioaldano.it</span>
+        <span>© 1998–2026 Gabriele Turissini</span>
+        <span>Privacy · Note legali · info@gabrieleturissini.it</span>
       </div>
     </div>
   </footer>

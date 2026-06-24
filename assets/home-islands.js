@@ -294,7 +294,7 @@ function HeroConstellation() {
 }
 
 /* ───────────────────────── mount ───────────────────────── */
-[['hero-app', HeroConstellation], ['servizi-app', ServicesExplorer], ['sim-app', WealthSimulator], ['faq-app', FaqAccordion]].forEach(([id, C]) => {
+[['hero-app', HeroConstellation], ['sim-app', WealthSimulator], ['faq-app', FaqAccordion]].forEach(([id, C]) => {
   const el = document.getElementById(id);
   if (el) createRoot(el).render(html`<${C} />`);
 });
