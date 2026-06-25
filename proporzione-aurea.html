@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proporzione aurea — Gabriele Turissini</title>
+  <meta name="description" content="La proporzione aurea come principio di equilibrio e misura: la giusta proporzione tra crescita e tutela del patrimonio, fra le generazioni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    /* Pagina "Proporzione aurea" — stile specifico, sui token condivisi */
+    .pa-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+    @media (max-width: 880px) { .pa-split { grid-template-columns: 1fr; } }
+
+    .pa-phi { font-family: var(--mono); font-size: clamp(4.5rem, 13vw, 9rem); color: var(--brass); line-height: 0.9; letter-spacing: -0.04em; }
+    .pa-phi small { display: block; font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--smoke); margin-top: 1.4rem; }
+    .pa-body { color: var(--smoke); max-width: 46ch; margin-top: 1.6rem; }
+    .pa-body b { color: var(--bone); font-weight: 500; }
+
+    /* Diagramma: spirale aurea */
+    .golden { width: 100%; height: auto; display: block; }
+    .golden .rect { fill: none; stroke: var(--brass); stroke-width: 1; opacity: 0.85; }
+    .golden .div { stroke: var(--brass); stroke-width: 0.75; opacity: 0.28; }
+    .golden .sq { fill: color-mix(in srgb, var(--brass) 5%, transparent); }
+    .golden .spiral { fill: none; stroke: var(--brass); stroke-width: 2.2; stroke-linecap: round; }
+    .golden .dot { fill: var(--brass); }
+    .golden text { fill: var(--smoke); font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: 0.04em; }
+
+    /* Barra che mostra il taglio aureo 1 : 1,618 */
+    .ratio-bar { display: flex; align-items: stretch; gap: 0; margin-top: 2.4rem; max-width: 560px; border: 1px solid var(--line); }
+    .ratio-bar > div { padding: 0.85rem 1.1rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .ratio-bar .maj { flex: 1.618; background: color-mix(in srgb, var(--brass) 14%, transparent); color: var(--brass); border-right: 1px solid var(--line); }
+    .ratio-bar .min { flex: 1; color: var(--smoke); }
+
+    /* Chiusura */
+    .pa-quote blockquote { position: relative; margin: 0; max-width: 22ch; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.9rem, 5.2vw, 3.6rem); line-height: 1.13; letter-spacing: -0.02em; }
+    .pa-quote blockquote::before { content: "\201C"; position: absolute; top: -0.35em; left: -0.42em; font-size: 2.4em; line-height: 1; color: var(--brass); opacity: 0.3; }
+    .pa-quote cite { display: block; margin-top: 2.2rem; font-family: var(--mono); font-style: normal; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--smoke); }
+    .pa-cta { margin-top: 3rem; }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <div>
+        <a class="brand" href="private-banker.html"><span class="brand__name">Gabriele Turissini</span><span class="brand__role">Private banker</span></a>
+        
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Navigazione principale">
+        <a href="mission.html">Mission</a>
+        <a href="proporzione-aurea.html" aria-current="page">Proporzione aurea</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="news.html">News</a>
+        <a href="press.html">Press</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+      <a class="btn btn--ghost" href="contatti.html">Richiedi un colloquio</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="page-hero">
+      <div class="page-hero__bg"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&h=900&fit=crop&q=80" alt="" loading="eager"></div>
+      <div class="wrap">
+        <p class="eyebrow">Il principio</p>
+        <h1>La proporzione <em>aurea</em>.</h1>
+        <p class="lead">Da venticinque secoli la stessa proporzione governa ciò che percepiamo come armonico — nella natura, nell'arte, nell'architettura. È anche il modo in cui pensiamo un patrimonio: la giusta misura fra crescita e tutela.</p>
+      </div>
+    </section>
+
+    <!-- Fascia immagine -->
+    <section class="image-band">
+      <div class="image-band__bg"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&h=700&fit=crop&q=80" alt="" loading="lazy"></div>
+      <div class="wrap">
+        <h2>La stessa proporzione, <em>ovunque</em>.</h2>
+        <p>Dalla conchiglia alla galassia: la sezione aurea è la firma dell'armonia in natura — e una guida per dare misura alle cose.</p>
+      </div>
+    </section>
+
+    <!-- φ + spirale -->
+    <section class="section">
+      <div class="wrap">
+        <div class="pa-split reveal">
+          <div>
+            <p class="eyebrow">Phi · φ</p>
+            <div class="pa-phi">1,618<small>Il numero della proporzione</small></div>
+            <p class="pa-body">Si ottiene quando il tutto sta alla parte maggiore come la parte maggiore sta alla minore. Un equilibrio in cui <b>ogni elemento è proporzionato all'insieme</b> — e l'insieme alle sue parti. Non il più grande, non il più piccolo: il più giusto.</p>
+            <div class="ratio-bar" aria-hidden="true">
+              <div class="maj">Parte maggiore · 1,618</div>
+              <div class="min">Minore · 1</div>
+            </div>
+          </div>
+          <div>
+            <svg class="golden" viewBox="0 0 720 445" role="img" aria-label="Spirale aurea costruita su rettangoli e quadrati in proporzione 1 a 1,618.">
+              <!-- quadrati (riempimenti tenui) -->
+              <rect class="sq" x="0"   y="0"   width="445" height="445" />
+              <rect class="sq" x="445" y="0"   width="275" height="275" />
+              <rect class="sq" x="550" y="275" width="170" height="170" />
+              <rect class="sq" x="445" y="340" width="105" height="105" />
+              <!-- rettangolo esterno -->
+              <rect class="rect" x="0" y="0" width="720" height="445" />
+              <!-- linee di suddivisione auree -->
+              <line class="div" x1="445" y1="0"   x2="445" y2="445" />
+              <line class="div" x1="445" y1="275" x2="720" y2="275" />
+              <line class="div" x1="550" y1="275" x2="550" y2="445" />
+              <line class="div" x1="445" y1="340" x2="550" y2="340" />
+              <line class="div" x1="485" y1="275" x2="485" y2="340" />
+              <!-- spirale aurea (archi di quarto di cerchio) -->
+              <path class="spiral" d="M 0 445
+                A 445 445 0 0 1 445 0
+                A 275 275 0 0 1 720 275
+                A 170 170 0 0 1 550 445
+                A 105 105 0 0 1 445 340
+                A 65 65 0 0 1 485 275" />
+              <circle class="dot" cx="485" cy="275" r="3.5" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- I quattro principi -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">La proporzione applicata</p>
+          <h2>Quattro modi di leggere la <em>misura</em>.</h2>
+          <p>Tradotta in consulenza patrimoniale, la proporzione aurea diventa un metodo di equilibrio.</p>
+        </div>
+        <div class="grid cols-2 reveal">
+          <div class="cell">
+            <span class="num">01</span>
+            <h3>Equilibrio</h3>
+            <p>La proporzione giusta fra crescita e protezione: esporsi quanto serve, tutelare ciò che non va messo a rischio.</p>
+          </div>
+          <div class="cell">
+            <span class="num">02</span>
+            <h3>Ritmo</h3>
+            <p>Il tempo come alleato. Le decisioni si misurano in generazioni, non in trimestri — come una spirale che cresce con regolarità.</p>
+          </div>
+          <div class="cell">
+            <span class="num">03</span>
+            <h3>Misura</h3>
+            <p>Né eccesso né timore. La dimensione corretta di ogni scelta è quella proporzionata agli obiettivi della famiglia.</p>
+          </div>
+          <div class="cell">
+            <span class="num">04</span>
+            <h3>Armonia</h3>
+            <p>Investimenti, governance e passaggio generazionale come parti di un unico disegno coerente, non come decisioni isolate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- La sezione aurea del patrimonio -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">In pratica</p>
+          <h2>La sezione aurea del <em>patrimonio</em>.</h2>
+          <p>Come il principio orienta le scelte concrete, passo dopo passo.</p>
+        </div>
+        <ul class="list reveal">
+          <li><strong>Definire l'insieme</strong><span>Prima delle parti, il quadro completo: obiettivi, vincoli, orizzonte e valori della famiglia.</span></li>
+          <li><strong>Trovare la proporzione</strong><span>Dividere il patrimonio nelle giuste misure tra ciò che lavora, ciò che protegge e ciò che si trasmette.</span></li>
+          <li><strong>Lasciare crescere con ordine</strong><span>Una struttura che si espande mantenendo le stesse proporzioni, come la spirale che ripete sé stessa a ogni scala.</span></li>
+          <li><strong>Rivedere, non stravolgere</strong><span>Correggere le proporzioni al variare della vita e dei mercati, conservando l'armonia dell'insieme.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Chiusura -->
+    <section class="section">
+      <div class="wrap pa-quote reveal">
+        <blockquote>La ricchezza, come la bellezza, è una questione di proporzioni.</blockquote>
+        <cite>— Gabriele Turissini</cite>
+        <div class="pa-cta">
+          <a class="btn" href="contatti.html">Richiedi un colloquio riservato</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav aria-label="Navigazione secondaria">
+        <a href="mission.html">Mission</a>
+        <a href="proporzione-aurea.html">Proporzione aurea</a>
+        <a href="chi-siamo.html">Chi siamo</a>
+        <a href="servizi.html">Servizi</a>
+        <a href="news.html">News</a>
+        <a href="press.html">Press</a>
+        <a href="contatti.html">Contatti</a>
+      </nav>
+      <p class="legal">Gabriele Turissini S.r.l. · Sede legale Piazza Vittorio Emanuele 7, 33038 San Daniele del Friuli (UD) · P.IVA 00000000000 · Iscrizione Albo OCF n. 000000. Il presente sito ha finalità informative e non rappresenta consulenza personalizzata né offerta di prodotti finanziari.</p>
+      <div class="row">
+        <span>© 1998–2026 Gabriele Turissini</span>
+        <span>Privacy · Note legali · info@gabrieleturissini.it</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
